@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} contact us {% endblock %}
+{% block body %}
+        <!-- Begin Body Wrapper -->
+        <div class="body-wrapper">
+            
+            <!-- Begin Li's Breadcrumb Area -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li class="active">Contact</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Breadcrumb Area End Here -->     
+            <!-- Begin Contact Main Page Area -->
+            <div class="contact-main-page mt-60 mb-40 mb-md-40 mb-sm-40 mb-xs-40">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="width: 50%; margin-left: 40px;"  role="alert" id="message">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="container">
+                
+                    <div class="row">
+                        <div class="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
+                        {% for contacts in contact_us %}
+                            <div class="contact-page-side-content">
+                                <h3 class="contact-page-title">Contact Us</h3>
+                                 <p>{{contacts.title}}</p>
+                                <div class="single-contact-block">
+                                    <h4><i class="fa fa-fax"></i> Address</h4>
+                                    <p>{{contacts.address}}</p>
+                                </div>
+                                <div class="single-contact-block">
+                                    <h4><i class="fa fa-phone"></i> Phone</h4>
+                                    <p>Mobile: {{contacts.mobile}}</p>
+                                    <p>Hotline: {{contacts.hotline}}</p>
+                                </div>
+                                <div class="single-contact-block last-child">
+                                    <h4><i class="fa fa-envelope-o"></i> Email</h4>
+                                    <p>{{contacts.email}}</p>
+                                    <p>{{contacts.support_mail}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <div class="col-lg-6 col-md-12 order-2 order-lg-1">
+                            <div class="contact-form-content pt-sm-55 pt-xs-55">
+                                <h3 class="contact-page-title">Tell Us Your Message</h3>
+                                <div class="contact-form">
+                                    <form action="" method='POST'>
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label>Your Name <span class="required">*</span></label>
+                                            <input type="text" name="name" id="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Your Email <span class="required">*</span></label>
+                                            <input type="email" name="email" id="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Subject</label>
+                                            <input type="text" name="subject" id="subject">
+                                        </div>
+                                        <div class="form-group mb-30">
+                                            <label>Your Message</label>
+                                            <textarea name="massage" id="massage" ></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" value="submit" id="submit" class="li-btn-3" name="submit">send</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <p class="form-messege"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
